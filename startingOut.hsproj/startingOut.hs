@@ -76,22 +76,32 @@ j = replicate 3 10
 
 -- list comprehensions
 lc = [x*2 | x <- [1..10]]
+lcf = [x*2 | x <- [1..10], x*2 < 5]
+
+-- list comprehension with several predicates
+lcr = [x | x <- [1..75], 
+           x `mod` 7 == 3,
+           x `mod` 5 == 2]
 
 
+lcmp = [x*y | x <- [1,2,3], y <- [1,2,3]]
 
 
+-- redefining the length function
+length' xs = sum [1 | _ <- xs]
 
 
+-- remove non uppercase
+removeNonUppercase st = [c | c <- st, c `elem` ['A'..'Z']]
 
 
+xxs = [[1,2,3],[4,5,6],[7,8,9]]
+xxsr = [ [ x | x <- xs, odd x ] | xs <- xxs]
+
+xsz = zip [1..] ["a","b","c"]
 
 
-
-
-
-
-
-
+rightTriangles = [ (a,b,c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2]   
 
 
 
