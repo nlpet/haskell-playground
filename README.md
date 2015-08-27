@@ -1,5 +1,5 @@
 # haskell-playground
 Learning Haskell
 
-## Sources
+### Sources
 * http://learnyouahaskell.com/chapters
