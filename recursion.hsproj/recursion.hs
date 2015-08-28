@@ -37,6 +37,7 @@ elem' a (x:xs)
   | otherwise = a `elem'` xs
 
 
+-- https://s3.amazonaws.com/lyah/quicksort.png
 quicksort :: (Ord a) => [a] -> [a]
 quicksort [] = []
 quicksort (x:xs) =
