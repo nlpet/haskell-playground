@@ -1,1 +1,1 @@
--- Chapter 4 - Types and Classes
+-- Chapter 4: Types and Classes
