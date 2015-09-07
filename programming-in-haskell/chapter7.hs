@@ -50,6 +50,19 @@ zipt (x:xs) (y:ys) = (x,y) : zipt xs ys
 
 -- Define the exponentiation operator ↑ for non-negative integers using the
 -- same pattern of recursion as the multiplicat
-(!^) :: Int -> Int -> Int
+(!^) :: Integer -> Integer -> Integer
 m !^ 0 = 1
 m !^ n = m * m !^ (n - 1)
+
+-- Define Knuth's double arrow notation (tetriation)
+(!^^) :: Integer -> Integer -> Integer
+m !^^ 0 = 1
+m !^^ 1 = m
+m !^^ n = m !^ (m !^^ (n - 1))
+
+-- Knuth's triple arrow notation (pentation)
+(!^^^) :: Integer -> Integer -> Integer
+m !^^^ 0 = 1
+m !^^^ 1 = m
+m !^^^ n = m !^^ (m !^^^ (n - 1))
+
