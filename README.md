@@ -1,5 +1,6 @@
 # haskell-playground
-Learning Haskell
+Personal project where I attempt to learn haskell by following various tutorials, online guides and books.
 
 ### Sources
-* http://learnyouahaskell.com/chapters
+* [Learn You A Haskell](http://learnyouahaskell.com/chapters)
+* [Programming in Haskell](http://www.cs.nott.ac.uk/~pszgmh/pih.html)
