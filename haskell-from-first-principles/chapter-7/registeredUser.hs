@@ -78,4 +78,6 @@ avgGrade x
 
 
 -- Functional composition
--- TODO
+-- (.) :: (b -> c) -> (a -> b) -> a -> c
+
+ns = negate . sum $ [1, 2, 3]
