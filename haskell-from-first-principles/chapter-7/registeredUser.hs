@@ -81,3 +81,11 @@ avgGrade x
 -- (.) :: (b -> c) -> (a -> b) -> a -> c
 
 ns = negate . sum $ [1, 2, 3]
+
+tf = take 5 . reverse $ [1..10]
+
+-- Point free style
+-- (f . g) x = f (g x)
+
+print' :: Show a => a -> IO ()
+print' a = (putStrLn . show) a
