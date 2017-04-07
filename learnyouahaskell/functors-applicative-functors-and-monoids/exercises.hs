@@ -67,3 +67,19 @@ fmap (f . g) F = fmap f (fmap g F).
 
 
 -- Applicative functors
+
+{-|
+
+class (Functor f) => Applicative f where
+    pure :: a -> f a
+    (<*>) :: f (a -> b) -> f a -> f b
+
+pure f <*> x equals fmap f x
+
+Control.Applicative exports a function called <$> (fmap as an infix operator):
+
+(<$>) :: (Functor f) => (a -> b) -> f a -> f b
+f <$> x = fmap f x
+
+(++) <$> Just "Hello" <*> Just " world"
+-}
