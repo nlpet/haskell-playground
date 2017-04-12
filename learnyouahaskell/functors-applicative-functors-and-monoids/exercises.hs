@@ -82,4 +82,11 @@ Control.Applicative exports a function called <$> (fmap as an infix operator):
 f <$> x = fmap f x
 
 (++) <$> Just "Hello" <*> Just " world"
+
+pure (+) <*> Just 3 <*> Just 5 == Just 8
+
+pure f <*> x equals fmap f x
+
+(<$>) :: (Functor f) => (a -> b) -> f a -> f b
+f <$> x = fmap f x 
 -}
