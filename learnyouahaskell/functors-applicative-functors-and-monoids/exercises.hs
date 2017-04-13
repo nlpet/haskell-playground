@@ -1,5 +1,6 @@
 import Data.Char
 import Data.List
+import Control.Applicative
 
 {-|
 Functors are things that can be mapped over (like lists, Maybes, trees, etc).
@@ -88,5 +89,65 @@ pure (+) <*> Just 3 <*> Just 5 == Just 8
 pure f <*> x equals fmap f x
 
 (<$>) :: (Functor f) => (a -> b) -> f a -> f b
-f <$> x = fmap f x 
+f <$> x = fmap f x
+
+
+[ x*y | x <- [2,5,10], y <- [8,10,11]]  == (*) <$> [2,5,10] <*> [8,10,11]
+
+filter (>50) $ (*) <$> [2,5,10] <*> [8,10,11]
+-}
+
+getUserInput :: IO String
+getUserInput = do
+    a <- getLine
+    b <- getLine
+    return $ a ++ b
+
+getUserInputApplicative :: IO String
+getUserInputApplicative = (++) <$> getLine <*> getLine
+
+
+{-|
+-- (->) r is a functor
+instance Applicative ((->) r) where
+    pure x = (\_ -> x)
+    f <*> g = \x -> f x (g x)
+
+-- Some ZipList examples
+
+getZipList $ (+) <$> ZipList [1,2,3] <*> ZipList [100,100,100] == [101,102,103]
+getZipList $ (+) <$> ZipList [1,2,3] <*> ZipList [100,100..] == [101,102,103]
+getZipList $ max <$> ZipList [1,2,3,4,5,3] <*> ZipList [5,3,1,2] == [5,3,3,4]
+getZipList $ (,,) <$> ZipList "dog" <*> ZipList "cat" <*> ZipList "rat"
+ == [('d','c','r'),('o','a','a'),('g','t','t')]
+
+-}
+
+
+-- we can take two applicative functors and combine them into one applicative
+-- functor that has inside it the results of those two applicative functors in a list.
+comb2AppF n = fmap (\x -> [x]) (Just n)
+
+comb2AppFLists n lst = liftA2 (:) (Just n) (Just lst)
+
+
+{-|
+
+sequenceA :: (Applicative f) => [f a] -> f [a]
+sequenceA [] = pure []
+sequenceA (x:xs) = (:) <$> x <*> sequenceA xs
+
+sequenceA :: (Applicative f) => [f a] -> f [a]
+sequenceA = foldr (liftA2 (:)) (pure [])
+
+-- Some examples
+
+sequenceA [Just 3, Just 2, Just 1]  == Just [3,2,1]
+sequenceA [(+3),(+2),(+1)] 3  == [6,5,4]
+
+map (\f -> f 7) [(>4),(<10),odd]  == sequenceA [(>4),(<10),odd] 7
+
+and $ map (\f -> f 7) [(>4),(<10),odd] == and $ sequenceA [(>4),(<10),odd] 7
+
+sequenceA [[1,2],[3,4]]  == [[x,y] | x <- [1,2], y <- [3,4]]
 -}
