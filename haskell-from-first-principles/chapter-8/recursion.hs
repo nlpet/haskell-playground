@@ -27,3 +27,20 @@ applyTimes n f b = f . applyTimes (n - 1) f $ b
 f :: Bool -> Maybe Int
 f False = Just 0
 f _ = Nothing
+
+
+-- 8.4 Fibonacci
+-- alternative type signature
+-- fibonacci :: Integer -> Integer
+fibonacci :: Integral a => a -> a
+fibonacci 0 = 0
+fibonacci 1 = 1
+fibonacci x = fibonacci (x - 1) + fibonacci (x - 2)
+
+
+-- 8.5 Integral division from scratch
+-- dividedBy :: Integral a => a -> a -> (a, a)
+-- dividedBy num denom = go num denom 0
+--   where go n d count
+--         |n < d = (count, n)
+--         |otherwise = go (n - d) d (count + 1)
